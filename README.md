@@ -25,9 +25,13 @@ remotes::install_github("ColinFay/gargoyle")
 
 ## About
 
-`{gargoyle}` is a package that provide an event-based framework for
-building a shiny application. The paradigm is centered around `listen` /
-`trigger` and `on`.
+`{gargoyle}` is a package that provide wrappers around some Shiny
+elements to turn your app into and event-based application instead of a
+full reactive app. The framework is centered around `listen` / `trigger`
+and `on`.
+
+It works with classical UI, and just needs tweaking the server side of
+your app.
 
 ### What the heck?
 
@@ -35,11 +39,9 @@ Shiny’s default reactive behavior is very helpful when it comes to
 building small applications. Because, you know, the good thing about
 reactivity is that when something moves somewhere, it’s updated
 everywhere. But the bad thing about reactivity is that when something
-moves somewhere, it’s updated everywhere. The result being that where it
-does work pretty well on small app, it can get very complicated to
-handle on bigger apps, where reactive values get updated too much, not
-when needed, or even loop from one to another. Cause let’s be honnest,
-reactivity can quickly get out of hands.
+moves somewhere, it’s updated everywhere. So it does work pretty well on
+small apps, but can get very complicated on bigger apps, and can quickly
+get out of hands.
 
 That’s where `{gargoyle}` comes: it provides an event based paradigm for
 building your apps, so that things happen under a control flow.
@@ -90,8 +92,7 @@ server <- function(input, output, session){
 
   observeEvent( input$y , {
     # Will trigger the UI change
-    # And the print below
-    x$event <- 1
+    x$event <- x$event + 1
     print(x$event)
     trigger(f$y)
   })
@@ -102,10 +103,10 @@ server <- function(input, output, session){
   })
 
   observeEvent( input$z , {
-    # This won't update the
-    # renderPrint
+    # Will not trigger a UI change
     x$event <- x$event + 1
     print(x$event)
+    # Will trigger the print
     trigger(f$a)
   })
 
