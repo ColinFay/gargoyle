@@ -1,54 +1,36 @@
-library(shiny)
-
 ui <- function(request){
   tagList(
-    h4('Trigger y'),
+    h4('Go'),
     actionButton("y", "y"),
-    h4('Trigger z'),
-    actionButton("z", "z"),
-    h4('Print change only triggered by y:'),
-    verbatimTextOutput("evt")
+    h4('Output of z$v'),
+    tableOutput("evt")
   )
 }
 
 server <- function(input, output, session){
 
-  x <- new_data( event = 0 )
+  init( "plop", "pouet", "poum")
 
-  f <- new_listeners("y", "z", "a")
+  z <- new.env()
 
   observeEvent( input$y , {
-    # Will trigger the UI change
-    # And the print below
-    x$event <- x$event + 1
-    print(x$event)
-    trigger(f$y)
+    trigger("plop")
+    z$v <- mtcars
   })
 
-  output$evt <- renderPrint({
-    listen(f$y)
-    x$event
+  on("plop", {
+    z$v <- airquality
+    trigger("pouet")
   })
 
-  observeEvent( input$z , {
-    # This won't update the
-    # renderPrint
-    x$event <- x$event + 1
-    print(x$event)
-    trigger(f$a)
+  on("pouet", {
+    z$v <- iris
+    trigger("poum")
   })
 
-  # Example of chaining triggers
-  on( f$a , {
-    print("f$a")
-    # This won't trigger the renderPrint
-    x$this <- runif(10)
-    trigger(f$z)
-  })
-
-  on( f$z , {
-    print("f$z")
-    print(x$this)
+  output$evt <- renderTable({
+    watch("poum")
+    head(z$v)
   })
 
 }
