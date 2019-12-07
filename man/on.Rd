@@ -4,13 +4,15 @@
 \alias{on}
 \title{React on an event}
 \usage{
-on(f, expr)
+on(name, expr, session = getDefaultReactiveDomain())
 }
 \arguments{
-\item{f}{the event to react to}
+\item{name}{the name of the event to react to}
 
 \item{expr}{the expression to run when the event
 is triggered.}
+
+\item{session}{The shiny session object}
 }
 \description{
 React on an event
