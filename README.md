@@ -71,7 +71,7 @@ A `{gargoyle}` has:
 
 ``` r
 library(shiny)
-pkgload::load_all()
+library(gargoyle)
 ui <- function(request){
   tagList(
     h4('Go'),
