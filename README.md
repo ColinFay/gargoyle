@@ -62,9 +62,8 @@ a big project.
 
 A `{gargoyle}` has:
 
-  - `new_data` & `new_listeners`, which contains values, and listeners
-
-  - `listen` & `trigger`, which allow to listen on / trigger an event
+  - `init`, `listen` & `trigger`, which allow to initiate, listen on,
+    and trigger an event
 
   - `on`, that runs the `expr` when the event in triggered
 
@@ -72,62 +71,52 @@ A `{gargoyle}` has:
 
 ``` r
 library(shiny)
-library(gargoyle)
+pkgload::load_all()
 ui <- function(request){
   tagList(
-    h4('Trigger y'),
+    h4('Go'),
     actionButton("y", "y"),
-    h4('Trigger z'),
-    actionButton("z", "z"),
-    h4('Print change only triggered by y:'),
-    verbatimTextOutput("evt")
+    h4('Output of z$v'),
+    tableOutput("evt")
   )
 }
 
 server <- function(input, output, session){
-
-  x <- new_data( event = 0)
-
-  f <- new_listeners("y", "z", "a")
-
+  
+  init( "plop", "pouet", "poum")
+  
+  z <- new.env()
+  
   observeEvent( input$y , {
-    # Will trigger the UI change
-    x$event <- x$event + 1
-    print(x$event)
-    trigger(f$y)
+    trigger("plop")
+    z$v <- mtcars
   })
-
-  output$evt <- renderPrint({
-    listen(f$y)
-    x$event
+  
+  on("plop", {
+    z$v <- airquality
+    trigger("pouet")
   })
-
-  observeEvent( input$z , {
-    # Will not trigger a UI change
-    x$event <- x$event + 1
-    print(x$event)
-    # Will trigger the print
-    trigger(f$a)
+  
+  on("pouet", {
+    z$v <- iris
+    trigger("poum")
   })
-
-  # Example of chaining triggers
-  on( f$a , {
-    print("f$a")
-    # This won't trigger the renderPrint
-    x$this <- runif(10)
-    x$a <- runif(1)
-    trigger(f$z)
+  
+  output$evt <- renderTable({
+    watch("poum")
+    head(z$v) 
   })
-
-  on( f$z , {
-    print("f$z")
-    print(x$this)
-    x$b <- runif(1)
-  })
-
+  
 }
 
 shinyApp(ui, server)
+```
+
+You can then get / clear the logs of the times the triggers were called:
+
+``` r
+get_gargoyle_logs()
+clear_gargoyle_logs()
 ```
 
 <br>

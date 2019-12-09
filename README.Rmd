@@ -105,7 +105,7 @@ shinyApp(ui, server)
 
 You can then get / clear the logs of the times the triggers were called: 
 
-```{r}
+```{r eval = FALSE}
 get_gargoyle_logs()
 clear_gargoyle_logs()
 ```
