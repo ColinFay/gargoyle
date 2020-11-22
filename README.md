@@ -25,7 +25,7 @@ remotes::install_github("ColinFay/gargoyle")
 
 ## About
 
-`{gargoyle}` is a package that provide wrappers around some Shiny
+`{gargoyle}` is a package that provides wrappers around some Shiny
 elements to turn your app into and event-based application instead of a
 full reactive app. The framework is centered around `listen` / `trigger`
 and `on`.
