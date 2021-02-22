@@ -10,8 +10,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-CMD-check](https://github.com/ColinFay/gargoyle/workflows/R-CMD-check/badge.svg)](https://github.com/ColinFay/gargoyle/actions)
 <!-- badges: end -->
 
-The goal of gargoyle is to provide a non-reactive, event-based framework
-for `{shiny}`.
+The goal of gargoyle is to provide an event-based mechanism for
+`{shiny}`.
 
 ## Installation
 

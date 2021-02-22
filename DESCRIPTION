@@ -1,8 +1,11 @@
 Package: gargoyle
-Title: An Event-Based Framework for 'Shiny'
-Version: 0.0.0.9000
+Title: An Event-Based Mechanism for 'Shiny'
+Version: 0.0.1
 Authors@R: person("Colin", "Fay", email = "contact@colinfay.me", role = c("aut", "cre"))
-Description: A non reactive, event-Based framework for building 'Shiny' apps.
+Description: An event-Based framework for building 'Shiny' apps.
+    Instead of relying on standard 'Shiny' reactive objects, this 
+    package allow to relying on a lighter set of triggers, so that 
+    reactive contexts can be invalidated with more control.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
