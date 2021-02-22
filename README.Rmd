@@ -15,8 +15,8 @@ knitr::opts_chunk$set(
 # gargoyle
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R-CMD-check](https://github.com/ColinFay/gargoyle/workflows/R-CMD-check/badge.svg)](https://github.com/ColinFay/gargoyle/actions)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 The goal of gargoyle is to provide an event-based mechanism for `{shiny}`.
@@ -83,7 +83,7 @@ ui <- function(request){
 server <- function(input, output, session){
   
   # Initiating the flags
-  init( "plop", "pouet", "poum")
+  init( "airquality", "iris", "renderiris")
   
   # Creating a new env to store values, instead of
   # a reactive structure
@@ -131,4 +131,4 @@ clear_gargoyle_logs()
 
 ## Code of Conduct
 
-Please note that the gargoyle project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the gargoyle project is released with a [Contributor Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/). By contributing to this project, you agree to abide by its terms.

@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![R-CMD-check](https://github.com/ColinFay/gargoyle/workflows/R-CMD-check/badge.svg)](https://github.com/ColinFay/gargoyle/actions)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable/)
 <!-- badges: end -->
 
 The goal of gargoyle is to provide an event-based mechanism for
@@ -99,13 +99,13 @@ server <- function(input, output, session){
     trigger("airquality")
   })
   
-  on("plop", {
+  on("airquality", {
     # Triggering the flag
     z$v <- airquality
     trigger("iris")
   })
   
-  on("pouet", {
+  on("iris", {
     # Triggering the flag
     z$v <- iris
     trigger("renderiris")
@@ -132,6 +132,9 @@ clear_gargoyle_logs()
 
 <br>
 
-Please note that the ‘gargoyle’ project is released with a [Contributor
-Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
-you agree to abide by its terms.
+## Code of Conduct
+
+Please note that the gargoyle project is released with a [Contributor
+Code of
+Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/).
+By contributing to this project, you agree to abide by its terms.

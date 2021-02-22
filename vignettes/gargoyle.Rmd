@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 library(gargoyle)
 ```
 
+## About
+
 `{gargoyle}` is a package that provides wrappers around `{shiny}` to turn your app into and event-based application instead of a full reactive app. 
 The framework is centered around a `listen` & `trigger` mechanism.
 
@@ -70,7 +72,7 @@ ui <- function(request){
 server <- function(input, output, session){
   
   # Initiating the flags
-  init( "plop", "pouet", "poum")
+  init( "airquality", "iris", "renderiris")
   
   # Creating a new env to store values, instead of
   # a reactive structure
@@ -112,3 +114,10 @@ You can then get & clear the logs of the times the triggers were called:
 get_gargoyle_logs()
 clear_gargoyle_logs()
 ```
+
+
+<br>
+
+## Code of Conduct
+
+Please note that the gargoyle project is released with a [Contributor Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/). By contributing to this project, you agree to abide by its terms.
