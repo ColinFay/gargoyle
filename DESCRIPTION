@@ -6,7 +6,7 @@ Description: A non reactive, event-Based framework for building 'Shiny' apps.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 Imports: 
     shiny,
     attempt

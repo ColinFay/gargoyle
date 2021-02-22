@@ -7,6 +7,7 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R-CMD-check](https://github.com/ColinFay/gargoyle/workflows/R-CMD-check/badge.svg)](https://github.com/ColinFay/gargoyle/actions)
 <!-- badges: end -->
 
 The goal of gargoyle is to provide a non-reactive, event-based framework
