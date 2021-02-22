@@ -6,7 +6,7 @@
 #' @rdname Event
 #' @importFrom shiny reactiveVal
 #' @export
-#' @example
+#' @examples
 #' if (interactive()){
 #'   library(shiny)
 #'   library(gargoyle)

@@ -12,7 +12,7 @@
 #' @return a data.frame
 #' @export
 #' @rdname logs
-#' @example
+#' @examples
 #' if (interactive()){
 #'   get_gargoyle_logs()
 #'   clear_gargoyle_logs()
