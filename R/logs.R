@@ -9,7 +9,7 @@
 #'
 #' Get / Clear the logs of all the time the `trigger()` functions are launched.
 #'
-#' @return a data.frame
+#' @return A data.frame of the logs.
 #' @export
 #' @rdname logs
 #' @examples

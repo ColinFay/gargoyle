@@ -17,6 +17,10 @@ watch(name, session = getDefaultReactiveDomain())
 
 \item{name, ...}{The name(s) of the events}
 }
+\value{
+The `session` object invisibly.
+These functions are mainly used for side-effects.
+}
 \description{
 Initiate, triger, event
 }

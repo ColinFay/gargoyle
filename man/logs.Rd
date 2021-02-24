@@ -10,7 +10,7 @@ get_gargoyle_logs()
 clear_gargoyle_logs()
 }
 \value{
-a data.frame
+A data.frame of the logs.
 }
 \description{
 Get / Clear the logs of all the time the `trigger()` functions are launched.

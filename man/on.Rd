@@ -14,6 +14,10 @@ is triggered.}
 
 \item{session}{The shiny session object}
 }
+\value{
+An observeEvent object. This object will
+rarely be used, `on` is mainly called for side-effects.
+}
 \description{
 React on an event
 }

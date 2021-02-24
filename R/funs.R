@@ -4,6 +4,10 @@
 #' @param session The shiny session object
 #'
 #' @rdname Event
+#'
+#' @return The `session` object invisibly.
+#' These functions are mainly used for side-effects.
+#'
 #' @importFrom shiny reactiveVal
 #' @export
 #' @examples
@@ -110,6 +114,9 @@ watch <- function(name, session = getDefaultReactiveDomain()){
 #' @param expr the expression to run when the event
 #'     is triggered.
 #' @param session The shiny session object
+#'
+#' @return An observeEvent object. This object will
+#' rarely be used, `on` is mainly called for side-effects.
 #'
 #' @export
 #' @importFrom shiny observeEvent getDefaultReactiveDomain

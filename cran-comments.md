@@ -7,26 +7,18 @@
 
 0 errors | 0 warnings | 1 note
 
-This is a resubmission after Uwe Ligges feedback 
+This is a resubmission after CRAN feedback 
 
->   Found the following (possibly) invalid URLs:
->      URL: https://www.tidyverse.org/lifecycle/#experimental (moved to
-> https://lifecycle.r-lib.org/articles/stages.html)
->        From: README.md
->        Status: 200
->        Message: OK
-> 
-> Please change http --> https, add trailing slashes, or follow moved
-> content as appropriate.
+> Please add \value to .Rd files regarding exported methods and explain
+> the functions results in the documentation. Please write about the
+> structure of the output (class) and also what the output means. (If a
+> function does not return a value, please document that too, e.g.
+> \value{No return value, called for side effects} or similar)
+> Missing Rd-tags:
+>       Event.Rd: \value
+>       on.Rd: \value
 
-=> Link updated in Readme.md
 
->    Found the following (possibly) invalid file URI:
->      URI: CODE_OF_CONDUCT.md
->        From: README.md
-> 
-> Pls include the file, link via a fully specified URL or omit the link.
-
-=> Link updated in Readme.md
+=> Added `\value`
 
 => Checked with `urlchecker::url_check()`
