@@ -7,7 +7,7 @@
 
 [![R-CMD-check](https://github.com/ColinFay/gargoyle/workflows/R-CMD-check/badge.svg)](https://github.com/ColinFay/gargoyle/actions)
 [![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable/)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 The goal of gargoyle is to provide an event-based mechanism for
@@ -61,10 +61,10 @@ a big project.
 
 `{gargoyle}` has:
 
-  - `init`, `listen` & `trigger`, which allow to initiate, listen on,
+-   `init`, `listen` & `trigger`, which allow to initiate, listen on,
     and trigger an event
 
-  - `on`, that runs the `expr` when the event in triggered
+-   `on`, that runs the `expr` when the event in triggered
 
 `gargoyle::trigger()` can print messages to the console using
 `options("gargoyle.talkative" = TRUE)`.
@@ -87,7 +87,7 @@ ui <- function(request){
 server <- function(input, output, session){
   
   # Initiating the flags
-  init( "plop", "pouet", "poum")
+  init("airquality", "iris", "renderiris")
   
   # Creating a new env to store values, instead of
   # a reactive structure
