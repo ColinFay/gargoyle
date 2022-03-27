@@ -136,7 +136,7 @@ on <- function(
     )
   )
   observeEvent(
-    substitute(watch(name)),
+    substitute(gargoyle::watch(name)),
     {
       substitute(expr)
     },
