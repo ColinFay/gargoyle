@@ -7,6 +7,8 @@ Description: An event-Based framework for building 'Shiny' apps.
     package allow to relying on a lighter set of triggers, so that 
     reactive contexts can be invalidated with more control.
 License: MIT + file LICENSE
+URL: https://github.com/ColinFay/gargoyle
+BugReports: https://github.com/ColinFay/gargoyle/issues
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
