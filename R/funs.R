@@ -1,4 +1,4 @@
-#' Initiate, triger, event
+#' Initiate, trigger, event
 #'
 #' @param name,... The name(s) of the events
 #' @param session The shiny session object
@@ -136,7 +136,7 @@ on <- function(
     )
   )
   observeEvent(
-    substitute(watch(name)),
+    substitute(gargoyle::watch(name)),
     {
       substitute(expr)
     },
