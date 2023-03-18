@@ -27,7 +27,7 @@
 #'   server <- function(input, output, session){
 #'
 #'     # Initiating the flags
-#'     init( "plop", "pouet", "poum")
+#'     init("airquality", "iris", "renderiris")
 #'
 #'     # Creating a new env to store values, instead of
 #'     # a reactive structure
