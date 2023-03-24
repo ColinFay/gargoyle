@@ -4,7 +4,7 @@
 \alias{init}
 \alias{trigger}
 \alias{watch}
-\title{Initiate, triger, event}
+\title{Initiate, trigger, event}
 \usage{
 init(..., session = getDefaultReactiveDomain())
 
@@ -22,7 +22,7 @@ The `session` object invisibly.
 These functions are mainly used for side-effects.
 }
 \description{
-Initiate, triger, event
+Initiate, trigger, event
 }
 \examples{
 if (interactive()){
@@ -41,7 +41,7 @@ if (interactive()){
   server <- function(input, output, session){
 
     # Initiating the flags
-    init( "plop", "pouet", "poum")
+    init("airquality", "iris", "renderiris")
 
     # Creating a new env to store values, instead of
     # a reactive structure
