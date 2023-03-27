@@ -29,7 +29,7 @@ This README has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-03-27 13:15:57 CEST"
+#> [1] "2023-03-27 16:53:20 CEST"
 ```
 
 Here are the test & coverage results :
@@ -38,16 +38,16 @@ Here are the test & coverage results :
 devtools::check(quiet = TRUE)
 #> ℹ Loading gargoyle
 #> ── R CMD check results ───────────────────────────────────── gargoyle 0.0.1 ────
-#> Duration: 10.9s
+#> Duration: 10.3s
 #> 
 #> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
 covr::package_coverage()
-#> gargoyle Coverage: 1.82%
-#> R/funs.R: 0.00%
-#> R/logs.R: 16.67%
+#> gargoyle Coverage: 56.36%
+#> R/funs.R: 51.02%
+#> R/logs.R: 100.00%
 ```
 
 ### What the heck?
