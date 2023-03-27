@@ -29,7 +29,7 @@ This README has been compiled on the
 
 ``` r
 Sys.time()
-#> [1] "2023-03-27 13:12:09 CEST"
+#> [1] "2023-03-27 13:15:57 CEST"
 ```
 
 Here are the test & coverage results :
@@ -38,13 +38,9 @@ Here are the test & coverage results :
 devtools::check(quiet = TRUE)
 #> ℹ Loading gargoyle
 #> ── R CMD check results ───────────────────────────────────── gargoyle 0.0.1 ────
-#> Duration: 10.6s
+#> Duration: 10.9s
 #> 
-#> ❯ checking top-level files ... NOTE
-#>   Non-standard file/directory found at top level:
-#>     ‘README.html’
-#> 
-#> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
+#> 0 errors ✔ | 0 warnings ✔ | 0 notes ✔
 ```
 
 ``` r
