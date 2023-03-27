@@ -15,8 +15,8 @@ knitr::opts_chunk$set(
 # gargoyle
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/ColinFay/gargoyle/workflows/R-CMD-check/badge.svg)](https://github.com/ColinFay/gargoyle/actions)
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R-CMD-check](https://github.com/ColinFay/gargoyle/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ColinFay/gargoyle/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of gargoyle is to provide an event-based mechanism for `{shiny}`.
@@ -31,33 +31,55 @@ remotes::install_github("ColinFay/gargoyle")
 
 ## About
 
-`{gargoyle}` is a package that provides wrappers around `{shiny}` to turn your app into and event-based application instead of a full reactive app. 
+You're reading the doc about version : `r pkgload::pkg_version()`
+
+This README has been compiled on the
+
+```{r}
+Sys.time()
+```
+
+Here are the test & coverage results :
+
+```{r}
+devtools::check(quiet = TRUE)
+```
+
+```{r echo = FALSE}
+unloadNamespace("shinipsum")
+```
+
+```{r}
+covr::package_coverage()
+```
+
+### What the heck?
+
+`{gargoyle}` is a package that provides wrappers around `{shiny}` to turn your app into and event-based application instead of a full reactive app.
 The framework is centered around a `listen` & `trigger` mechanism.
 
 It works with classical UI, and just needs tweaking the server side of your app.
 
-### What the heck?
-
-`{shiny}`'s default reactive behavior is very helpful when it comes to building small applications. 
+`{shiny}`'s default reactive behavior is very helpful when it comes to building small applications.
 Because, you know, the good thing about reactivity is that when something moves somewhere, it's updated everywhere.
-But the bad thing about reactivity is that when something moves somewhere, it's updated everywhere. 
-So it does work pretty well on small apps, but can get very complicated on bigger apps, and can quickly get out of hands. 
+But the bad thing about reactivity is that when something moves somewhere, it's updated everywhere.
+So it does work pretty well on small apps, but can get very complicated on bigger apps, and can quickly get out of hands.
 
-That's where `{gargoyle}` comes into play: it provides an event based paradigm for building your apps, so that things happen under a control flow. 
+That's where `{gargoyle}` comes into play: it provides an event based paradigm for building your apps, so that things happen under a control flow.
 
 ### For whom?
 
-If you're just building small `{shiny}` apps, you're probably good with `{shiny}` default reactive behavior. 
-But if ever you've struggled with reactivity on more bigger apps, you might find `{gargoyle}` useful. 
+If you're just building small `{shiny}` apps, you're probably good with `{shiny}` default reactive behavior.
+But if ever you've struggled with reactivity on more bigger apps, you might find `{gargoyle}` useful.
 
 ### The trade-off
 
-`{gargoyle}` will be more verbose and will demand more work upfront to make things happen. 
-I believe this is for the best if you're working on a big project. 
+`{gargoyle}` will be more verbose and will demand more work upfront to make things happen.
+I believe this is for the best if you're working on a big project.
 
 ## Design pattern
 
-`{gargoyle}` has: 
+`{gargoyle}` has:
 
 + `init`, `listen` & `trigger`, which allow to initiate, listen on, and trigger an event
 
@@ -81,45 +103,45 @@ ui <- function(request){
 }
 
 server <- function(input, output, session){
-  
+
   # Initiating the flags
   init("airquality", "iris", "renderiris")
-  
+
   # Creating a new env to store values, instead of
   # a reactive structure
   z <- new.env()
-  
+
   observeEvent( input$y , {
     z$v <- mtcars
     # Triggering the flag
     trigger("airquality")
   })
-  
+
   on("airquality", {
     # Triggering the flag
     z$v <- airquality
     trigger("iris")
   })
-  
+
   on("iris", {
     # Triggering the flag
     z$v <- iris
     trigger("renderiris")
   })
-  
+
   output$evt <- renderTable({
     # This part will only render when the renderiris
     # flag is triggered
     watch("renderiris")
-    head(z$v) 
+    head(z$v)
   })
-  
+
 }
 
 shinyApp(ui, server)
 ```
 
-You can then get & clear the logs of the times the triggers were called: 
+You can then get & clear the logs of the times the triggers were called:
 
 ```{r eval = FALSE}
 get_gargoyle_logs()

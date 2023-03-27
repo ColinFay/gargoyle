@@ -5,9 +5,9 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/ColinFay/gargoyle/workflows/R-CMD-check/badge.svg)](https://github.com/ColinFay/gargoyle/actions)
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
+[![R-CMD-check](https://github.com/ColinFay/gargoyle/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ColinFay/gargoyle/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of gargoyle is to provide an event-based mechanism for
@@ -23,6 +23,39 @@ remotes::install_github("ColinFay/gargoyle")
 
 ## About
 
+You’re reading the doc about version : 0.0.1
+
+This README has been compiled on the
+
+``` r
+Sys.time()
+#> [1] "2023-03-27 13:12:09 CEST"
+```
+
+Here are the test & coverage results :
+
+``` r
+devtools::check(quiet = TRUE)
+#> ℹ Loading gargoyle
+#> ── R CMD check results ───────────────────────────────────── gargoyle 0.0.1 ────
+#> Duration: 10.6s
+#> 
+#> ❯ checking top-level files ... NOTE
+#>   Non-standard file/directory found at top level:
+#>     ‘README.html’
+#> 
+#> 0 errors ✔ | 0 warnings ✔ | 1 note ✖
+```
+
+``` r
+covr::package_coverage()
+#> gargoyle Coverage: 1.82%
+#> R/funs.R: 0.00%
+#> R/logs.R: 16.67%
+```
+
+### What the heck?
+
 `{gargoyle}` is a package that provides wrappers around `{shiny}` to
 turn your app into and event-based application instead of a full
 reactive app. The framework is centered around a `listen` & `trigger`
@@ -30,8 +63,6 @@ mechanism.
 
 It works with classical UI, and just needs tweaking the server side of
 your app.
-
-### What the heck?
 
 `{shiny}`’s default reactive behavior is very helpful when it comes to
 building small applications. Because, you know, the good thing about
@@ -61,10 +92,10 @@ a big project.
 
 `{gargoyle}` has:
 
--   `init`, `listen` & `trigger`, which allow to initiate, listen on,
-    and trigger an event
+- `init`, `listen` & `trigger`, which allow to initiate, listen on, and
+  trigger an event
 
--   `on`, that runs the `expr` when the event in triggered
+- `on`, that runs the `expr` when the event in triggered
 
 `gargoyle::trigger()` can print messages to the console using
 `options("gargoyle.talkative" = TRUE)`.
@@ -85,39 +116,39 @@ ui <- function(request){
 }
 
 server <- function(input, output, session){
-  
+
   # Initiating the flags
   init("airquality", "iris", "renderiris")
-  
+
   # Creating a new env to store values, instead of
   # a reactive structure
   z <- new.env()
-  
+
   observeEvent( input$y , {
     z$v <- mtcars
     # Triggering the flag
     trigger("airquality")
   })
-  
+
   on("airquality", {
     # Triggering the flag
     z$v <- airquality
     trigger("iris")
   })
-  
+
   on("iris", {
     # Triggering the flag
     z$v <- iris
     trigger("renderiris")
   })
-  
+
   output$evt <- renderTable({
     # This part will only render when the renderiris
     # flag is triggered
     watch("renderiris")
-    head(z$v) 
+    head(z$v)
   })
-  
+
 }
 
 shinyApp(ui, server)
