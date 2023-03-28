@@ -14,7 +14,10 @@ LazyData: true
 RoxygenNote: 7.2.3
 Imports: 
     shiny,
-    attempt
+    attempt,
+    R6,
+    qs,
+    fs
 Suggests: 
     knitr,
     rmarkdown,
