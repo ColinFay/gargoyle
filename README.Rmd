@@ -56,7 +56,7 @@ covr::package_coverage()
 ### What the heck?
 
 `{gargoyle}` is a package that provides wrappers around `{shiny}` to turn your app into and event-based application instead of a full reactive app.
-The framework is centered around a `listen` & `trigger` mechanism.
+The framework is centered around a `watch` & `trigger` mechanism.
 
 It works with classical UI, and just needs tweaking the server side of your app.
 
@@ -69,8 +69,8 @@ That's where `{gargoyle}` comes into play: it provides an event based paradigm f
 
 ### For whom?
 
-If you're just building small `{shiny}` apps, you're probably good with `{shiny}` default reactive behavior.
-But if ever you've struggled with reactivity on more bigger apps, you might find `{gargoyle}` useful.
+If you're just building small `{shiny}` apps you're probably good with `{shiny}` default reactive behavior.
+But if ever you've struggled with reactivity in larger apps you might find `{gargoyle}` useful.
 
 ### The trade-off
 
@@ -81,9 +81,9 @@ I believe this is for the best if you're working on a big project.
 
 `{gargoyle}` has:
 
-+ `init`, `listen` & `trigger`, which allow to initiate, listen on, and trigger an event
++ `init`, `watch` & `trigger`, which allow to initiate, watch, and trigger an event
 
-+ `on`, that runs the `expr` when the event in triggered
++ `on`, that runs the `expr` when the event is triggered
 
 `gargoyle::trigger()` can print messages to the console using `options("gargoyle.talkative" = TRUE)`.
 
@@ -111,7 +111,7 @@ server <- function(input, output, session){
   # a reactive structure
   z <- new.env()
 
-  observeEvent( input$y , {
+  observeEvent(input$y , {
     z$v <- mtcars
     # Triggering the flag
     trigger("airquality")
