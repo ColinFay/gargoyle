@@ -65,17 +65,18 @@ Because, you know, the good thing about reactivity is that when something moves 
 But the bad thing about reactivity is that when something moves somewhere, it's updated everywhere.
 So it does work pretty well on small apps, but can get very complicated on bigger apps, and can quickly get out of hands.
 
-That's where `{gargoyle}` comes into play: it provides an event based paradigm for building your apps, so that things happen under a control flow.
+That's where `{gargoyle}` comes into play: it provides an event based paradigm for building your apps, so that reactivity happens under a controlled flow.
 
 ### For whom?
 
 If you're just building small `{shiny}` apps you're probably good with `{shiny}` default reactive behavior.
-But if ever you've struggled with reactivity in larger apps you might find `{gargoyle}` useful.
+But if ever you've struggled with reactivity in larger apps you might find `{gargoyle}` useful: only invalidate contexts when you want and make the general flow of your app more predictable!
 
 ### The trade-off
 
 `{gargoyle}` will be more verbose and will demand more work upfront to make things happen.
-I believe this is for the best if you're working on a big project.
+I believe this is for the best if you're working on a big project: from the very beginning 
+it forces the user to think more carefully about app design and the reactive flow.
 
 ## Design pattern
 
