@@ -105,12 +105,14 @@ watch <- function(name, session = getDefaultReactiveDomain()) {
 
 #' React on an event
 #'
-#' @param name the name of the event to react to
-#' @param expr the expression to run when the event
-#'     is triggered.
-#' @param session The shiny session object
+#' @param name The name of the event to react to as a character; can be a
+#'   character vector of event names in which case a reaction is triggered if
+#'   any (all) of the events is (are) triggered (i.e. the non-exclusive "OR"
+#'   case).
+#' @param expr The expression to run when the event is triggered.
+#' @param session The shiny session object.
 #'
-#' @return An observeEvent object. This object will
+#' @return An [shiny::observeEvent()] object. This object will
 #' rarely be used, `on` is mainly called for side-effects.
 #'
 #' @export
