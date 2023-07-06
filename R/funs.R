@@ -126,7 +126,7 @@ on <- function(
     all(name %in% names(session$userData)),
     msg = sprintf(
       "[Gargoyle] Flag %s hasn't been initiated: can't listen to it.\n",
-      name
+      name[!(name %in% names(session$userData))]
     )
   )
   watch_expr <- generate_watch_expr(name)
