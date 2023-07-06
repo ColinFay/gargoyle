@@ -102,7 +102,6 @@ watch <- function(name, session = getDefaultReactiveDomain()) {
   session$userData[[name]]()
 }
 
-
 #' React on an event
 #'
 #' @param name The name of the event to react to as a character; can be a
@@ -148,12 +147,17 @@ generate_watch_expr <- function(name) {
     tmp_expr <- parse(
       text = paste0(
         "list(",
-        paste0("gargoyle::watch(name[", seq_along(name), "])", collapse = ", "),
+        paste0(
+          "gargoyle::watch(name[",
+          seq_along(name),
+          "], session = session)",
+          collapse = ", "
+        ),
         ")"
       )
     )
   } else {
-    tmp_expr <- parse(text = "gargoyle::watch(name)")
+    tmp_expr <- parse(text = "gargoyle::watch(name, session = session)")
   }
   return(tmp_expr)
 }
