@@ -11,21 +11,20 @@
 #' @importFrom shiny reactiveVal
 #' @export
 #' @examples
-#' if (interactive()){
+#' if (interactive()) {
 #'   library(shiny)
 #'   library(gargoyle)
 #'   options("gargoyle.talkative" = TRUE)
-#'   ui <- function(request){
+#'   ui <- function(request) {
 #'     tagList(
-#'       h4('Go'),
+#'       h4("Go"),
 #'       actionButton("y", "y"),
-#'       h4('Output of z$v'),
+#'       h4("Output of z$v"),
 #'       tableOutput("evt")
 #'     )
 #'   }
 #'
-#'   server <- function(input, output, session){
-#'
+#'   server <- function(input, output, session) {
 #'     # Initiating the flags
 #'     init("airquality", "iris", "renderiris")
 #'
@@ -33,7 +32,7 @@
 #'     # a reactive structure
 #'     z <- new.env()
 #'
-#'     observeEvent( input$y , {
+#'     observeEvent(input$y, {
 #'       z$v <- mtcars
 #'       # Triggering the flag
 #'       trigger("airquality")
@@ -57,25 +56,22 @@
 #'       watch("renderiris")
 #'       head(z$v)
 #'     })
-#'
 #'   }
 #'
 #'   shinyApp(ui, server)
-#'
 #' }
-init <- function(..., session = getDefaultReactiveDomain()){
+init <- function(..., session = getDefaultReactiveDomain()) {
   lapply(
     list(...),
-    function(x){
+    function(x) {
       session$userData[[x]] <- reactiveVal(0)
     }
   )
-
 }
 
 #' @rdname Event
 #' @export
-trigger <- function(..., session = getDefaultReactiveDomain()){
+trigger <- function(..., session = getDefaultReactiveDomain()) {
   .logs$log <- rbind(
     .logs$log,
     data.frame(
@@ -86,8 +82,8 @@ trigger <- function(..., session = getDefaultReactiveDomain()){
   )
   lapply(
     list(...),
-    function(x){
-      if (getOption("gargoyle.talkative", FALSE)){
+    function(x) {
+      if (getOption("gargoyle.talkative", FALSE)) {
         cat(
           "- [Gargoyle] Triggering",
           x,
@@ -99,44 +95,43 @@ trigger <- function(..., session = getDefaultReactiveDomain()){
       )
     }
   )
-
 }
 #' @rdname Event
 #' @export
-watch <- function(name, session = getDefaultReactiveDomain()){
+watch <- function(name, session = getDefaultReactiveDomain()) {
   session$userData[[name]]()
 }
 
-
 #' React on an event
 #'
-#' @param name the name of the event to react to
-#' @param expr the expression to run when the event
-#'     is triggered.
-#' @param session The shiny session object
+#' @param name The name of the event to react to as a character; can be a
+#'   character vector of event names in which case a reaction is triggered if
+#'   any (all) of the events is (are) triggered (i.e. the non-exclusive "OR"
+#'   case).
+#' @param expr The expression to run when the event is triggered.
+#' @param session The shiny session object.
 #'
-#' @return An observeEvent object. This object will
+#' @return An [shiny::observeEvent()] object. This object will
 #' rarely be used, `on` is mainly called for side-effects.
 #'
 #' @export
 #' @importFrom shiny observeEvent getDefaultReactiveDomain
-#' @importFrom attempt stop_if
+#' @importFrom attempt stop_if_not
 on <- function(
   name,
   expr,
   session = getDefaultReactiveDomain()
-  ){
-
-  stop_if(
-    session$userData[[name]],
-    is.null,
-    sprintf(
-      "[Gargoyle] Flag %s hasn't been initiated: can't listen to it.",
-      name
+    ) {
+  stop_if_not(
+    all(name %in% names(session$userData)),
+    msg = sprintf(
+      "[Gargoyle] Flag %s hasn't been initiated: can't listen to it.\n",
+      name[!(name %in% names(session$userData))]
     )
   )
+  watch_expr <- generate_watch_expr(name)
   observeEvent(
-    substitute(gargoyle::watch(name)),
+    do.call("substitute", list(watch_expr[[1]])),
     {
       substitute(expr)
     },
@@ -146,4 +141,23 @@ on <- function(
     event.env = parent.frame(),
     handler.env = parent.frame()
   )
+}
+generate_watch_expr <- function(name) {
+  if (length(name) > 1) {
+    tmp_expr <- parse(
+      text = paste0(
+        "list(",
+        paste0(
+          "gargoyle::watch(name[",
+          seq_along(name),
+          "], session = session)",
+          collapse = ", "
+        ),
+        ")"
+      )
+    )
+  } else {
+    tmp_expr <- parse(text = "gargoyle::watch(name, session = session)")
+  }
+  return(tmp_expr)
 }
